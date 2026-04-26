@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MicDots® Global — Shared Drive Hub</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%230f4c81'/><stop offset='100%25' stop-color='%234f8bff'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='url(%23g)'/><text x='32' y='44' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='34' font-weight='800' fill='white'>M</text><circle cx='49' cy='17' r='6' fill='%23ff7a59' stroke='white' stroke-width='2'/></svg>" />
 <style>
   :root {
     --bg: #f4f6fa;
@@ -33,7 +34,35 @@
     padding: 56px 32px 72px;
     box-shadow: var(--shadow);
   }
-  .hero-inner { max-width: 1200px; margin: 0 auto; }
+  .hero-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
+  .hero-logo {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(6px);
+    position: relative;
+  }
+  .hero-logo .m {
+    color: #fff;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .hero-logo .dot {
+    position: absolute;
+    top: 6px; right: 6px;
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid #fff;
+  }
+  .hero-text { display: flex; flex-direction: column; }
   .hero h1 {
     font-size: clamp(28px, 4vw, 40px);
     margin: 0 0 8px;
@@ -47,8 +76,9 @@
     padding: 4px 12px;
     border-radius: 999px;
     font-size: 13px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     backdrop-filter: blur(6px);
+    align-self: flex-start;
   }
   main {
     max-width: 1200px;
@@ -102,10 +132,7 @@
     flex-direction: column;
     gap: 12px;
   }
-  .card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
-  }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
   .card-head { display: flex; align-items: flex-start; gap: 12px; }
   .badge {
     flex-shrink: 0;
@@ -147,15 +174,8 @@
     font-size: 14px;
     transition: background 0.12s, color 0.12s;
   }
-  ul.subfolders li a:hover {
-    background: var(--brand-soft);
-    color: var(--brand-light);
-  }
-  ul.subfolders li a::before {
-    content: "▸";
-    font-size: 11px;
-    color: var(--card-color, var(--accent));
-  }
+  ul.subfolders li a:hover { background: var(--brand-soft); color: var(--brand-light); }
+  ul.subfolders li a::before { content: "▸"; font-size: 11px; color: var(--card-color, var(--accent)); }
   .open-link {
     margin-top: auto;
     font-size: 13px;
@@ -165,13 +185,7 @@
     align-self: flex-start;
   }
   .open-link:hover { text-decoration: underline; }
-  .empty {
-    color: var(--muted);
-    font-size: 13px;
-    font-style: italic;
-    padding: 6px 0 0;
-    margin: 0;
-  }
+  .empty { color: var(--muted); font-size: 13px; font-style: italic; padding: 6px 0 0; margin: 0; }
   footer {
     text-align: center;
     color: var(--muted);
@@ -183,6 +197,7 @@
 
   @media (max-width: 600px) {
     header.hero { padding: 40px 20px 56px; }
+    .hero-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
     main { padding: 0 16px; margin-top: -24px; }
     .grid { grid-template-columns: 1fr; }
   }
@@ -191,9 +206,15 @@
 <body>
   <header class="hero">
     <div class="hero-inner">
-      <span class="pill">Shared Drive Hub</span>
-      <h1>MicDots® Global</h1>
-      <p>One-click access to all 10 corporate departments and their working folders.</p>
+      <div class="hero-logo" aria-hidden="true">
+        <span class="m">M</span>
+        <span class="dot"></span>
+      </div>
+      <div class="hero-text">
+        <span class="pill">Shared Drive Hub</span>
+        <h1>MicDots® Global</h1>
+        <p>One-click access to all 10 corporate departments and their working folders.</p>
+      </div>
     </div>
   </header>
 
